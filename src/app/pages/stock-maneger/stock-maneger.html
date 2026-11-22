@@ -1,0 +1,138 @@
+<section class="section-gerenciamento">
+
+    <div class="main-container">
+
+        <div class="form-movimentacao">
+            <h4>Nova Movimentação</h4>
+            <p>Registre entrada ou saída de produtos</p>
+            <form (ngSubmit)="criarMovimentacao()" #movimentacaoForm="ngForm" class="formulario">
+
+                <label for="produtos" class="label">Produto*</label>
+                <select name="produtos" id="produtos" class="inputstyle" [(ngModel)]="formData.product" required>
+                    <option [defaultSelected]="" >Selecione um produto</option>
+                    @for (item of produto; track item.uuid) {
+                    <option [value]="item.uuid" class="style-options">
+                        {{item.name}} - Estoque: {{item.stock}}
+                    </option>
+                    }
+                </select>
+
+                <label for="movimentation" class="label">Tipo de Movimentação*</label>
+                <select name="movimentation" id="movimentation" [(ngModel)]="formData.type" class="inputstyle" required>
+                    @for (item of typeMovimentations; track item.type) {
+                    <option [value]="item.type">{{item.label}}</option>
+                    }
+                </select>
+
+                <label for="quantidade" class="label">Quantidade*</label>
+                <input type="number" id="quantidade" name="quantidade" class="inputstyle"
+                    [(ngModel)]="formData.quantity" required placeholder="Digite a quantidade" aria-placeholder=""
+                    minlength="0">
+
+                <label for="data_movimentacao" class="label">Data da Movimentação*</label>
+                <input type="date" id="data_movimentacao" class="inputstyle" name="data_movimentacao"
+                    [(ngModel)]="formData.date" required>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-salvar" [disabled]="!movimentacaoForm.valid">
+                        Registrar Movimentação
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div>
+
+            <div class="container-status">
+                <div class="titulo">
+                    <h4 class="title">Status dos Produtos (Ordem Alfabética)</h4>
+                    <p class="description">Lista ordenada de produtos com status de estoque</p>
+                </div>
+                <div class="products">
+                    @for (item of produto; track $index) {
+
+                        @if (item.stock > item.min_stock){
+
+                            <div class="card-stock estoquebaixo">
+                                <div class="lefcard">
+                                    <h3 class="name-item">{{item.name}}</h3>
+                                    <p class="conectivy">{{item.connectivity}} </p>
+                                </div>
+                                <div class="cardright">
+                                    <p class="p-stock">Estoque</p>
+                                    @if (item.stock > item.min_stock) {
+                                        <p class="stock-normal">{{item.stock}}/{{item.min_stock}}</p>
+                                    }
+                                    @else {
+                                    <div class="stock-baixo">
+                                        <p class="stock-baixo">{{item.stock}}/{{item.min_stock}}</p>
+                                    </div>
+                                    }
+                                </div>
+
+                            </div>
+                        }
+                        @else{
+                            <div class="card-stock estoquenomral">
+                                <div class="lefcard">
+                                    <h3 class="name-item">{{item.name}}</h3>
+                                    <p class="conectivy">{{item.connectivity}} </p>
+                                </div>
+                                <div class="cardright">
+                                    <p class="p-stock">Estoque</p>
+                                        @if (item.stock > item.min_stock) {
+                                            <p class="stock-normal">{{item.stock}}/{{item.min_stock}}</p>
+                                        }
+                                        @else {
+                                            <div class="stock-baixo">
+                                                <p class="stock-baixo">{{item.stock}}/{{item.min_stock}}</p>
+                                            </div>
+                                        }
+                                </div>
+
+                            </div>
+                        }
+                    }
+                </div>
+
+            </div>
+            <div class="container-historico">
+                <h4 class="title-container">Histórico de Movimentações</h4>
+                <p>Registro completo de todas as movimentações realizadas.</p>
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Produto</th>
+                            <th>Tipo</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of movimentation; track $index) {
+                        <tr>
+                            <td>{{item.date | date:'dd/MM/yyyy'}}</td>
+                            <td>{{getProdutoNome(item.product)}}</td>
+                            <td>
+                                <span [class]="item.type === 'input' ? 'badge-entrada' : 'badge-saida'">
+                                    {{item.type === 'input' ? 'Entrada' : 'Saída'}}
+                                </span>
+                            </td>
+                            <td class="text-center">{{item.quantity}}</td>
+                        </tr>
+                        }
+                        @empty {
+                        <tr>
+                            <td colspan="4" class="empty-state">
+                                Nenhuma movimentação encontrada
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</section>

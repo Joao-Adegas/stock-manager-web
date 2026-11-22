@@ -1,0 +1,154 @@
+<div class="modal-overlay" (click)="closeOnOverlay($event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>{{ mode === 'create' ? 'Novo Produto' : 'Editar Produto' }}</h2>
+      <button class="close-btn" (click)="close()">
+        <lucide-angular [img]="X" [size]="24"></lucide-angular>
+      </button>
+    </div>
+
+
+    <div class="modal-body">
+      <form class="product-form">
+        
+        <div class="form-group">
+          <label for="product">Categoria *</label>
+          <select 
+            id="product" 
+            [(ngModel)]="formData.product"
+            name="product"
+            required>
+            <option *ngFor="let cat of categorias" [value]="cat">
+              {{ cat }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Nome do Produto *</label>
+          <input 
+            type="text" 
+            id="name" 
+            [(ngModel)]="formData.name"
+            name="name"
+            placeholder="Ex: iPhone 15 Pro Max"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="voltage">Tensão *</label>
+          <input 
+            type="text" 
+            id="voltage" 
+            [(ngModel)]="formData.voltage"
+            name="voltage"
+            placeholder="Ex: 110-220V"
+            required>
+        </div>
+
+
+        <div class="form-group">
+          <label for="dimension">Dimensão *</label>
+          <input 
+            type="text" 
+            id="dimension" 
+            [(ngModel)]="formData.dimension"
+            name="dimension"
+            placeholder="Ex: 15 x 7 x 0.8 cm"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="screen_resolutions">Resolução de Tela *</label>
+          <input 
+            type="text" 
+            id="screen_resolutions" 
+            [(ngModel)]="formData.screen_resolutions"
+            name="screen_resolutions"
+            placeholder="Ex: 1170 x 2532"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="storage_capacity">Capacidade de Armazenamento *</label>
+          <input 
+            type="text" 
+            id="storage_capacity" 
+            [(ngModel)]="formData.storage_capacity"
+            name="storage_capacity"
+            placeholder="Ex: 128GB"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label>Conectividade</label>
+          <div class="connectivity-input">
+            <input 
+              type="text" 
+              [(ngModel)]="newConectivity"
+              name="newConnectivity"
+              placeholder="Ex: 5G, WiFi, Bluetooth"
+              (keyup.enter)="addConnectivity()">
+            <button 
+              type="button" 
+              class="btn-add"
+              (click)="addConnectivity()">
+              Adicionar
+            </button>
+          </div>
+          
+          <div class="connectivity-list" *ngIf="formData.connectivity.length > 0">
+            <span 
+              *ngFor="let conn of formData.connectivity; let i = index" 
+              class="connectivity-tag">
+              {{ conn }}
+              <button 
+                type="button" 
+                class="remove-tag"
+                (click)="removeConnectivity(i)">
+                ×
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="stock">Estoque *</label>
+            <input 
+              type="number" 
+              id="stock" 
+              [(ngModel)]="formData.stock"
+              name="stock"
+              min="0"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="min_stock">Estoque Mínimo *</label>
+            <input 
+              type="number" 
+              id="min_stock" 
+              [(ngModel)]="formData.min_stock"
+              name="min_stock"
+              min="0"
+              required>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="close()">
+        Cancelar
+      </button>
+      <button 
+        class="btn-primary" 
+        (click)="save()"
+        [disabled]="!isFormValid()">  
+        {{ mode === 'create' ? 'Criar Produto' : 'Salvar Alterações' }}
+      </button>
+    </div>
+  </div>
+</div>

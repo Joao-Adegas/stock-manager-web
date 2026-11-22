@@ -1,0 +1,14 @@
+<header class="header-main">
+    <div class="container-header">
+        <h2>Sistema de Gestão De Estoque</h2>
+        <p>Equipamentos Eletrônicos</p>
+    </div>
+    <div class="perfil">
+        <lucide-angular [img]="User" class="icon-thin"></lucide-angular>
+        <p>{{ pegarNomeDoUsuario() }}</p>
+        <button class="exitButton" (click)="logout()"> 
+            <lucide-angular  [size]="15"></lucide-angular> 
+            Sair
+        </button>
+    </div>
+</header>

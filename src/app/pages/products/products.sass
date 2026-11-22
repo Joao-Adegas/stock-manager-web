@@ -1,0 +1,187 @@
+@use '../../../styles' as *
+    
+.list-products
+    padding: 2rem
+    gap: 2rem
+    width: 100%
+    display: flex
+    align-items: center
+    flex-direction: column
+    justify-content: center
+
+    .btn-voltar
+        border: none
+        background: none
+        
+
+    .container
+        width: 90%
+        padding: 1rem
+        border-radius: 1rem
+        min-height: 50rem
+        gap: 1.5rem
+        display: flex
+        background-color: #fff
+        flex-direction: column
+        border: $border
+
+        .top-container
+            display: flex
+            justify-content: space-between
+            align-items: center
+
+            .top-left
+                display: flex
+                flex-direction: column
+                gap: 0.5rem
+
+                h3
+                    margin: 0
+                    font-size: 1.5rem
+                    color: #333
+
+                p
+                    margin: 0
+                    color: #666
+
+
+        .top-right-button button
+            display: flex
+            border: $border
+            background-color: $buttongeneral
+            color: $textButtongeneral
+            padding: 0.7rem 1.2rem
+            border-radius: 0.5rem
+            font-size: 16px 
+            cursor: pointer
+            transition: all 0.3s ease
+
+            .texto
+                margin-left: 1rem
+                font-weight: bold
+
+        .main-container
+            display: flex
+            flex-direction: column
+            gap: 1.5rem
+            overflow-x: auto 
+            
+            .search-product
+                position: relative
+
+                input
+                    width: 100%
+                    padding: 0.7rem
+                    border: 1px solid #ddd
+                    outline: none
+                    border-radius: $borderRadius
+                    background-color: $colorInput
+                    font-size: 14px
+
+                    &:focus
+                        outline: none
+                        border-color: rgba(7, 5, 5, 0.1)
+                        box-shadow: 0px 1px 2px 2px rgba(105, 105, 105, 0.103)
+
+            
+            .table
+                width: 100%
+                border-collapse: collapse
+                table-layout: fixed 
+
+            .head-table
+                
+
+
+                tr
+                    th
+                        padding: 1rem 0.5rem
+                        text-align: left
+                        color: #6c757d
+                        font-weight: 600
+                        font-size: 14px
+                        white-space: nowrap
+
+            .body-table
+                tr
+                    border-bottom: 1px solid #e9ecef
+                    transition: background-color 0.2s ease
+
+                    &:hover
+                        background-color: #f8f9fa
+
+                    td
+                        padding: 1rem 0.5rem
+                        vertical-align: middle
+                        font-size: 14px
+                        color: #495057
+
+           
+            .truncate-cell
+                position: relative
+                max-width: 150px  
+                overflow: hidden
+
+                .truncate-text
+                    display: block
+                    white-space: nowrap
+                    overflow: hidden
+                    position: relative
+                    padding-right: 20px  
+
+                   
+                    &::after
+                        content: ''
+                        position: absolute
+                        right: 0
+                        top: 0
+                        bottom: 0
+                        width: 40px
+                        background: linear-gradient(to right, transparent, #fff)
+                        pointer-events: none
+
+                &:hover
+                    .truncate-text
+                        &::after
+                            display: none
+
+                    &::before
+                        position: absolute
+                        bottom: 100%
+                        left: 0
+                        background-color: #333
+                        color: white
+                        padding: 0.5rem
+                        border-radius: 4px
+                        white-space: normal
+                        max-width: 250px
+                        z-index: 1000
+                        font-size: 12px
+                        line-height: 1.4
+            .actions
+                display: flex
+                gap: 0.5rem
+                justify-content: start
+
+                .action-btn
+                    background: none
+                    border: none
+                    cursor: pointer
+                    padding: 0.3rem
+                    border-radius: 4px
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    transition: all 0.2s ease
+                    
+
+                    &.delete-btn
+                        color: #dc3545 !important
+                        &:hover
+                            background-color: #dbe5f1
+
+                    &.edit-btn:hover
+                        background-color: #e3f2fd
+                      
+
+

@@ -1,0 +1,32 @@
+<section class="container-dashboard">
+
+
+    <div class="container-separador">
+
+        <div class="bemvindo">
+            <h2>Bem-Vindo,Administrador</h2>
+            <p>Gerencie seu estoque de equipamentos de forma eficiente</p>
+        </div>
+
+        <div class="group-cards">
+            @for (a of cards; track $index) {
+                <app-card-dashboard [title]="a.title" [qtd]="a.qtd" [description]="a.description"></app-card-dashboard>
+            }
+        </div>
+    </div>
+
+    <div class="separador">
+        <div class="cardCadastroProdutos" routerLink="/products">
+            <h4>Cadastro de Produtos</h4>
+            <p>Adicione, edite ou remova produtos do seu estoque. Vizualize todos os produtos cadastrados em uma tabela completa.</p>
+            <button class="buttoncard" routerLink="/products">Acessar Cadastro</button>
+        </div>
+        <div class="cardGestaoEstoque" routerLink="/stockmaneger"> 
+            <h4>Gestão de Estoque</h4>
+            <p>Registre entradas e saídas de produtos. Acompanhe o histórico de movimentações e receba alertas de estoques baixos</p>
+            <button class="buttoncard" routerLink="/stockmaneger">Acessar Estoque</button>
+        </div>
+    </div>
+
+
+</section>

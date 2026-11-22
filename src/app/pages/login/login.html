@@ -1,0 +1,40 @@
+<section class="section-login">
+    <p>Sistema de Gestão de Estoque</p>
+    <p>Equipamentos Eletrônicos</p>
+
+    <div class="form-login">
+        <form (ngSubmit)="onSubmit()">
+            <div>
+                <b class="title">Autenticação</b>
+                <p>Entre com suas credenciasi para acessar o sistema</p>
+            </div>
+
+            <div class="input">
+                <label for="username">
+                    Usuário
+                </label>
+                <input type="text" [(ngModel)]="username" name="username" id="username" placeholder="Digite seu usuário"
+                    required>
+            </div>
+
+            <div class="input">
+                <label for="password">
+                    Senha
+                </label>
+                <input type="password" [(ngModel)]="password" name="password" id="password"
+                    placeholder="Digite sua senha">
+            </div>
+
+            <div class="button">
+                <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+                    <ng-container *ngIf="!isLoading">Entrar</ng-container>
+
+                    <mat-progress-spinner *ngIf="isLoading" diameter="20" mode="indeterminate" class="color-spinner"></mat-progress-spinner>
+                </button>
+
+            </div>
+
+
+        </form>
+    </div>
+</section>

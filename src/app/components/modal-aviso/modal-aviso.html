@@ -1,0 +1,19 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">
+      <lucide-icon [img]="X"></lucide-icon>
+    </button>
+    
+    <div class="modal-icon">
+      <lucide-icon [img]="AlertCircle" [size]="64" color="#dc3545"></lucide-icon>
+    </div>
+    
+    <h2>Sessão Expirada</h2>
+    <p>Sua sessão expirou por inatividade ou o token de acesso não é mais válido.</p>
+    <p>Por favor, faça login novamente para continuar.</p>
+    
+    <button class="btn-primary" (click)="closeModal()">
+      Ir para Login
+    </button>
+  </div>
+</div>

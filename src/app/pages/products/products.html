@@ -1,0 +1,91 @@
+<section class="list-products">
+    <div class="container">
+        <div class="top-container">
+            <div class="top-left">
+                <h3>Lista de Produtos</h3>
+                <p>Vizualize, adicione, edite ou remova produtos do estoque</p>
+            </div>
+            <div class="top-right-button">
+                <button (click)="abrirModalCriacao()">
+                    <lucide-angular [img]="Plus" [size]="15"></lucide-angular>
+                    <span class="texto">Novo Produto</span>
+                </button>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="search-product">
+                <input type="text" [(ngModel)]="termoPesquisa" (input)="filtrarProdutos()"
+                    placeholder="Busca por nome, categoria">
+            </div>
+
+            <table class="table">
+                <thead class="head-table">
+                    <tr class="tr-head-table">
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Dimensão</th>
+                        <th>Resolução de tela</th>
+                        <th>Capacidade Armazenamento</th>
+                        <th>Conectividade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="body-table">
+
+                    @if (produtosFiltrados.length === 0 && termoPesquisa) {
+                        <td colspan="7" style="text-align: center; padding: 2rem;">
+                            Nenhum produto encontrado para "{{ termoPesquisa }}"
+                        </td>
+                    }
+
+                    @if (produto.length === 0 && !termoPesquisa) {
+                        <td colspan="7" style="text-align: center; padding: 2rem;">
+                            Nenhum produto cadastrado
+                        </td>
+                    }
+                    
+                    @for (a of produtosFiltrados; track $index) {
+                        <tr>
+                            <td class="truncate-cell">
+                                <span class="truncate-text">{{ a.name }}</span>
+                            </td>
+                            <td class="truncate-cell">
+                                <span class="truncate-text">{{ a.product }}</span>
+                            </td>
+                            <td class="truncate-cell">
+                                <span class="truncate-text">{{ a.dimension }}</span>
+                            </td>
+                            <td class="truncate-cell">
+                                <span class="truncate-text">{{ a.screen_resolutions }}</span>
+                            </td>
+                            <td class="truncate-cell">
+                                <span class="truncate-text">{{ a.storage_capacity }}</span>
+                            </td>
+                            <td class="truncate-cell">
+                                <span class="truncate-text">
+                                    <span *ngFor="let conn of a.connectivity; let last = last">
+                                        {{ conn }}<span *ngIf="!last">, </span>
+                                    </span>
+                                </span>
+                            </td>
+                            <td class="actions">
+                                <button class="action-btn delete-btn" (click)="deletarProduto(a.uuid!)">
+                                    <lucide-angular [img]="Trash2" [size]="20" class="delete-icon"></lucide-angular>
+                                </button>
+                                <button class="action-btn edit-btn" (click)="abrirModalEdicao(a)" title="Editar">
+                                    <lucide-angular [img]="SquarePen" [size]="20"></lucide-angular>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <app-modal-create-edit-product *ngIf="abrirModal" [mode]="tipoModal" [produto]="editarProduto"
+        (onClose)="fecharModal()" (onSave)="salvarProduto($event)">
+    </app-modal-create-edit-product>
+</section>
